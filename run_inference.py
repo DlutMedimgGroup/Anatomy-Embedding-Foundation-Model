@@ -21,9 +21,9 @@ def inference():
     task_name = config['Task']['task_name']
     globalVal.project_path = config['Task']['project_path']
     maybe_mkdir_p(globalVal.project_path)
-    globalVal.model_path = join(globalVal.project_path, 'trained_models', task_name)
+    globalVal.model_path = join(globalVal.project_path, 'trained_models')
     maybe_mkdir_p(globalVal.model_path)
-    globalVal.output_path = join(globalVal.project_path, 'inference', task_name, config['Inference']['inference_name'])
+    globalVal.output_path = join(globalVal.project_path, 'inference', config['Inference']['inference_name'])
     maybe_mkdir_p(globalVal.output_path)
     # init log file, txt from print() will be automaticaly writhed into the log file
     init_log_file(globalVal.output_path, prefix='inference_log')

@@ -9,7 +9,7 @@
 from utility import *
 import numpy as np
 from data_loader.dataloader_seg import dataloader_seg
-from data_loader.custom_transform.LoadPreprocessed import LoadPreprocessed
+from data_loader.LoadPreprocessed import LoadPreprocessed
 from monai.transforms import (
     Compose,
     CenterSpatialCropd,

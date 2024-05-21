@@ -31,7 +31,7 @@ from monai.transforms import (
     CenterSpatialCropd,
     ScaleIntensityRange
 )
-from data_loader.custom_transform.flareScaleIntensityRanged import flareScaleIntensityRanged
+from data_loader.flareScaleIntensityRanged import flareScaleIntensityRanged
 
 class dataloader_seg(base_dataloader):
     '''

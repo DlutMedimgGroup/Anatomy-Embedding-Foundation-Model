@@ -34,7 +34,7 @@ from monai.transforms import (
 from monai.config import DtypeLike, KeysCollection
 from monai.config.type_definitions import NdarrayOrTensor
 from utility import *
-from data_loader.custom_transform.flareScaleIntensityRanged import flareScaleIntensityRanged
+from data_loader.flareScaleIntensityRanged import flareScaleIntensityRanged
 
 class ReadAndRandSpatialCropd(MapTransform, InvertibleTransform, Randomizable):
     """

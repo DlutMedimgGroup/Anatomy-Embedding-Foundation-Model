@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
-from network.SAM.sam_downstream_unet_3d import sam_downstream_unet_3d
-from network.SAM.sam_unet_3d import sam_unet_3d
+from network.sam_downstream_unet_3d import sam_downstream_unet_3d
+from network.sam_unet_3d import sam_unet_3d
 
 class sam_with_unet(nn.Module):
     def __init__(

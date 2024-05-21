@@ -7,8 +7,7 @@ from utility import *
 
 from model.base_model import base_model
 from monai.networks.nets import UNet
-from network.SAM.sam_downstream_unet_3d import sam_downstream_unet_3d
-from network.SAM.sam_downstream_unet_3d_2 import sam_downstream_unet_3d_2
+from network.sam_downstream_unet_3d import sam_downstream_unet_3d
 
 class model_sam_downstream_seg(base_model):
     '''
@@ -40,25 +39,8 @@ class model_sam_downstream_seg(base_model):
                 disable_sam = self.disable_sam,
                 disable_global = self.disable_global,
             ).to(self.device)
-        elif self.network_name == 'sam_downstream_unet_3d_2':
-            self.network = sam_downstream_unet_3d_2(
-                num_res_units=self.num_res_units,
-                in_data_channels=1,
-                in_sam_channels=self.in_sam_channels,
-                out_channels=self.out_channels,
-                disable_sam = self.disable_sam,
-                disable_global = self.disable_global,
-            ).to(self.device)
         else:
             assert False, 'unknown network'
-        # self.network = UNet(
-        #     spatial_dims=3,
-        #     in_channels=1,
-        #     out_channels=self.out_channels,
-        #     channels=(32, 64, 128, 256, 512),
-        #     strides=(2, 2, 2, 2),
-        #     num_res_units=1,
-        # ).to(self.device)
 
         self.optimizer = torch.optim.Adam(self.network.parameters(), 1e-4, weight_decay=1e-5)
         self.lr_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(self.optimizer, T_max=self.max_epochs)

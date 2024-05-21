@@ -4,11 +4,7 @@ import numpy as np
 from monai.inferers import sliding_window_inference
 from monai.data import decollate_batch
 from inference.inference_seg import inference_seg
-from network.SAM.sam_unet_3d import sam_unet_3d
-from network.SAM.sam_unet_3d_2 import sam_unet_3d_2
-from network.SAM.sam_with_fullconn_head import sam_with_fullconn_head
-from network.SAM.sam_with_unet import sam_with_unet
-from network.SAM.sam_with_cluster import sam_with_cluster
+from network.sam_with_unet import sam_with_unet
 from mip_pkg.datatype.Image_Data import Image_Data
 import mip_pkg.io.IO_Image_Data as IO_Image_Data
 from utility import *
@@ -36,33 +32,10 @@ class inference_sam_downstream_seg(inference_seg):
             assert isfile(self.checkpoint_name), "error: checkpoint file does not exist. from trainer_SAM_downstream_seg.py"
             checkpoint = torch.load(self.checkpoint_name)
             
-            if self.sam_network_name == 'sam_unet_3d':
-                self.sam_network = sam_unet_3d(
-                    num_res_units=self.sam_num_res_units,
-                    target_feature_size=self.sam_target_feature_size,
-                ).to(globalVal.device)
-            elif self.sam_network_name == 'sam_unet_3d_2':
-                self.sam_network = sam_unet_3d_2(
-                    num_res_units=self.sam_num_res_units,
-                    target_feature_size=self.sam_target_feature_size,
-                ).to(globalVal.device)
-            elif self.sam_network_name == 'sam_with_fullconn_head':
-                self.sam_network = sam_with_fullconn_head(
-                    sam_channels=self.sam_target_feature_size,
-                    out_channels=15,
-                ).to(globalVal.device)
-            elif self.sam_network_name == 'sam_with_unet':
+            if self.sam_network_name == 'sam_with_unet':
                 self.sam_network = sam_with_unet(
                     sam_channels=self.sam_target_feature_size,
                     out_channels=14,
-                ).to(globalVal.device)
-            elif self.sam_network_name == 'sam_with_cluster':
-                self.trainer_config = self.checkpoint_name = config['Train']['trainer_SAM_downstream_seg']
-                self.sam_network = sam_with_cluster(
-                    sam_channels=self.sam_target_feature_size,
-                    sam_num_res_units=self.sam_num_res_units,
-                    out_channels=self.trainer_config['cluster_out_channels'],
-                    middle_channels=self.trainer_config['cluster_middle_channels'],
                 ).to(globalVal.device)
 
             if self.sam_network_name == 'sam_unet_3d' or self.sam_network_name == 'sam_unet_3d_2':

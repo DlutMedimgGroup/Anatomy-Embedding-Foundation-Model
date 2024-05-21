@@ -7,9 +7,11 @@ setup(
     python_requires=">=3.9",
     install_requires=[
         "monai", 
+        "Nibabel",
         "SimpleITK>=2.2.1", 
         "tqdm", 
-        "toml"
+        "toml",
+        "vtk"
         ],
     packages=find_packages(exclude="notebooks"),
     extras_require={
