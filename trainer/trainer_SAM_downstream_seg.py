@@ -1,11 +1,8 @@
 import torch
 from monai.inferers import sliding_window_inference
 from monai.data import decollate_batch
-from network.SAM.sam_unet_3d import sam_unet_3d
-from network.SAM.sam_unet_3d_2 import sam_unet_3d_2
-from network.SAM.sam_with_fullconn_head import sam_with_fullconn_head
-from network.SAM.sam_with_unet import sam_with_unet
-from network.SAM.sam_with_cluster import sam_with_cluster
+from network.sam_unet_3d import sam_unet_3d
+from network.sam_with_unet import sam_with_unet
 from trainer.trainer_segmentation import trainer_segmentation
 from utility import *
 

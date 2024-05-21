@@ -24,9 +24,18 @@ Download the [model checkpoint](https://1drv.ms/f/s!AiAogjEIFaXOgulqdHCFV3p4O24f
 
 2. Test the segmentation model on your images
 
-    You need to change the config file to set the test dataset. 
-
+    You need to change the config file to set the test dataset. The method is to change the `split_filename` in the Inference section of the configuration file `downseg_20.toml`. If you want to create a new `split file`, you can use `./tools/split_file_creator.py`
 
 ## Downsteam Segmentation Network Training
 
+Preprocess the training data with `./tools/preprocess.py`
+
+Create a new `split file` with `./tools/split_file_creator.py`
+
+Firstly, set the `split_filename` in the Training section of the configuration file `downseg_20.toml`.
+
+Run training with:
+``` shell
+python run_training.py -c ./config_files/downseg_20.toml
+```
 
